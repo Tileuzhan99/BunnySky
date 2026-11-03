@@ -1,13 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
     public int maxHp = 3;
     public int hp;
-    public TextMeshProUGUI hpText;
+    public Image[] hearts;
     public AudioClip hurtSound;
     public AudioClip healSound;
 
@@ -20,7 +20,7 @@ public class Health : MonoBehaviour
         hp = maxHp;
         renderers = GetComponentsInChildren<Renderer>();
         audioSource = GetComponent<AudioSource>();
-        hpText.text = "x " + hp;
+        ShowHearts();
     }
 
     public void TakeDamage(int damage)
@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
         if (invincible) return;
 
         hp -= damage;
-        hpText.text = "x " + hp;
+        ShowHearts();
         audioSource.PlayOneShot(hurtSound);
 
         if (hp <= 0)
@@ -45,8 +45,17 @@ public class Health : MonoBehaviour
     {
         hp += amount;
         if (hp > maxHp) hp = maxHp;
-        hpText.text = "x " + hp;
+        ShowHearts();
         audioSource.PlayOneShot(healSound);
+    }
+
+    void ShowHearts()
+    {
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < hp) hearts[i].color = Color.white;
+            else hearts[i].color = new Color(0f, 0f, 0f, 0.4f);
+        }
     }
 
     IEnumerator Blink()
