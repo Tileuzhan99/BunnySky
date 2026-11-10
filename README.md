@@ -14,8 +14,19 @@ A blaster-wielding bunny hops across floating sky islands, collects coins and fi
 | 0 | Menu | title, Play, Quit |
 | 1 | Level1 | tutorial: platforms, coins, spikes, heart, goal flag |
 | 2 | Level2 | crabs, flying bee, saw, lift platform |
-| 3 | Boss | Horned King, fireballs, HP bar |
-| 4 | Win | You Win + Menu |
+| 3 | Level3 | enemy arena: Patroller, Shooter and Charger together, crate cover |
+| 4 | Boss | Horned King, fireballs, HP bar |
+| 5 | Win | You Win + Menu |
+
+## Enemies
+
+| Enemy | Model | States | How to beat it |
+|-------|-------|--------|----------------|
+| Patroller (`Patroller.cs`) | crab | Patrol → Chase → Attack | it sees only in front (120°, 8 m, walls block); step back when it flashes red (0.5 s) |
+| Shooter (`Shooter.cs`) | bee | Watch → Aim → Cooldown | red laser for 0.6 s, then a stinger; hide behind crates or sidestep |
+| Charger (`Charger.cs`) | skull | Wander → WindUp → Charge → Tired | flashes red for 0.7 s, dashes straight; sidestep or jump, shoot it while it is grey (tired) |
+
+All three inherit `SmartEnemy` (sight with Raycast, on-screen check, wind-up tint and sound), which inherits `Enemy` (HP, hits, death). Movement uses NavMeshSurface + NavMeshAgent. Tuning numbers are public fields on the prefabs. Decisions are logged in [DECISIONS.md](DECISIONS.md).
 
 ## Controls
 
