@@ -3,6 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int hp = 1;
+    public bool touchDamage = true;
 
     public virtual void TakeHit()
     {
@@ -20,6 +21,8 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if (!touchDamage) return;
+
         Health health = collision.gameObject.GetComponent<Health>();
         if (health != null)
         {
