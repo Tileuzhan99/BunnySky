@@ -14,3 +14,6 @@
 - 2026-11-11 Problem: the old Enemy class hurts the player on touch — an attack with no wind-up. New enemies use touchDamage = false and hurt only after a visible wind-up (crab 0.5 s, bee 0.6 s laser, skull 0.7 s).
 - 2026-11-11 Charger must not dash from off-screen: it starts the wind-up only if the player is in range, visible by Raycast and the skull is on screen. Tested with the camera turned away: it keeps wandering.
 - 2026-11-11 Built Level3, an arena with all three types together and crate walls as cover, so hiding from the bee's laser is a real choice. A tree at the start blocked the camera, so I moved it.
+- 2026-11-11 Playtest 1 on a phone, two friends: after getting used to the controls they beat Level 3 on the 1st try — too easy. Some deaths came from missed jumps, not from enemies.
+- 2026-11-11 Playtest 2 on a phone, two new testers: 2 tries each. Both deaths came from the Shooter's stinger; the Patroller and the Charger never killed anyone.
+- 2026-11-11 Tuning after the playtests: Patroller chaseSpeed 3.5 → 4.2 and Charger chargeSpeed 11 → 13, so the crab and the skull are real threats too; Shooter windUp 0.6 → 0.7 s, so the laser is easier to react to and the bee is not the only killer.

@@ -391,7 +391,7 @@ MonoBehaviour:
   firePoint: {fileID: 2132184415182845392}
   laser: {fileID: 2909852249422675761}
   scanSpeed: 40
-  windUp: 0.6
+  windUp: 0.7
   cooldown: 1.6
 --- !u!1001 &38493960348477650
 PrefabInstance:

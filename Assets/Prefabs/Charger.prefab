@@ -231,7 +231,7 @@ MonoBehaviour:
   arriveDistance: 0.3
   triggerRange: 9
   windUp: 0.7
-  chargeSpeed: 11
+  chargeSpeed: 13
   chargeTime: 0.8
   hitDistance: 1.3
   tiredTime: 1.5

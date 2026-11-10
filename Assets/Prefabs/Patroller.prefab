@@ -228,7 +228,7 @@ MonoBehaviour:
   fadeTime: 0.1
   waypoints: []
   patrolSpeed: 2
-  chaseSpeed: 3.5
+  chaseSpeed: 4.2
   arriveDistance: 0.3
   loseSightTime: 2
   attackRange: 1.6
