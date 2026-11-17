@@ -242,6 +242,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 461c2999d6b54da449afe4b4c306e8ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Menu
+  mainPanel: {fileID: 0}
+  levelsPanel: {fileID: 0}
+  settingsPanel: {fileID: 0}
+  messageText: {fileID: 0}
 --- !u!4 &176170530
 Transform:
   m_ObjectHideFlags: 0
@@ -6020,6 +6024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2115071281}
   - component: {fileID: 2115071280}
+  - component: {fileID: 2115071282}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -6139,6 +6144,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2115071282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115071279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 516f4d9f93dbb3243901e8ab43bf9ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicVolume
 --- !u!1 &2120067560
 GameObject:
   m_ObjectHideFlags: 0
