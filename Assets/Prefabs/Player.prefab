@@ -228,11 +228,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43171fd81de471348b2e158322c4aa31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  speed: 6
-  jumpForce: 7
+  stats: {fileID: 11400000, guid: 450642780b0494540a9971c381c08206, type: 2}
   bulletPrefab: {fileID: 241341441605957103, guid: 84e9179bd72e6c445ab971f0bff11bcc, type: 3}
   firePoint: {fileID: 8149904809209273770}
-  fireCooldown: 0.4
   coinsNeeded: 5
   coinText: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: 7c70adcca156dd54dbadd16da09f3d37, type: 3}
@@ -251,11 +249,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fea53b005853ca40b05de14cabac743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHp: 3
-  hp: 0
-  hpText: {fileID: 0}
+  stats: {fileID: 11400000, guid: 450642780b0494540a9971c381c08206, type: 2}
+  hearts: []
+  emptyHeartColor: {r: 0, g: 0, b: 0, a: 0.4}
   hurtSound: {fileID: 8300000, guid: 915fe590161a3c44f8beeb6c55550030, type: 3}
   healSound: {fileID: 8300000, guid: a5b17464f010b0c498f171a7341e5a5d, type: 3}
+  hp: 0
 --- !u!1 &6215979689160981073
 GameObject:
   m_ObjectHideFlags: 0

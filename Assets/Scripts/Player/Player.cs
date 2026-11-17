@@ -5,12 +5,10 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 6f;
-    public float jumpForce = 7f;
+    public PlayerStats stats;
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public float fireCooldown = 0.4f;
-    public int coinsNeeded = 5;
+    public int coinsNeeded;
     public TextMeshProUGUI coinText;
     public AudioClip jumpSound;
     public AudioClip coinSound;
@@ -42,7 +40,7 @@ public class Player : MonoBehaviour
     {
         if (onGround)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * stats.jumpForce, ForceMode.Impulse);
             audioSource.PlayOneShot(jumpSound);
         }
     }
@@ -51,7 +49,7 @@ public class Player : MonoBehaviour
     {
         if (Time.time > nextFireTime)
         {
-            nextFireTime = Time.time + fireCooldown;
+            nextFireTime = Time.time + stats.fireCooldown;
             Instantiate(bulletPrefab, firePoint.position, transform.rotation);
             audioSource.PlayOneShot(shootSound);
         }
@@ -59,12 +57,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        onGround = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.3f);
+        onGround = Physics.Raycast(transform.position + Vector3.up * stats.groundCheckHeight, Vector3.down, stats.groundCheckDistance);
 
         anim.SetFloat("Speed", move.magnitude);
         anim.SetBool("OnGround", onGround);
 
-        if (transform.position.y < -10f)
+        if (transform.position.y < stats.fallLimit)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -79,17 +77,17 @@ public class Player : MonoBehaviour
 
         Vector3 direction = forward.normalized * move.y + right.normalized * move.x;
 
-        rb.linearVelocity = new Vector3(direction.x * speed, rb.linearVelocity.y, direction.z * speed);
+        rb.linearVelocity = new Vector3(direction.x * stats.moveSpeed, rb.linearVelocity.y, direction.z * stats.moveSpeed);
 
-        if (direction.magnitude > 0.1f)
+        if (direction != Vector3.zero)
         {
             transform.rotation = Quaternion.LookRotation(direction);
         }
     }
 
-    public void AddCoin()
+    public void AddCoin(int amount)
     {
-        coins++;
+        coins += amount;
         coinText.text = coins + " / " + coinsNeeded;
         audioSource.PlayOneShot(coinSound);
     }

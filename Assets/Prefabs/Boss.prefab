@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c8d0a717c9ca74d80979ab4ec66407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
-  hp: 12
+  stats: {fileID: 11400000, guid: 8f99650f432793e47bb77130b9c60d2f, type: 2}
   fireballPrefab: {fileID: 3402978855516802936, guid: a8a9df7d37d2c8444acb4ba09bb88dd8, type: 3}
   firePoint: {fileID: 5064522777733621294}
   player: {fileID: 0}

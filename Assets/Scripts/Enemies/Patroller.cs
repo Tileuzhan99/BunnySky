@@ -6,15 +6,8 @@ public class Patroller : SmartEnemy
     enum State { Patrol, Chase, Attack }
 
     public Transform[] waypoints;
-    public float patrolSpeed = 2f;
-    public float chaseSpeed = 3.5f;
-    public float arriveDistance = 0.3f;
-    public float loseSightTime = 2f;
-    public float attackRange = 1.6f;
-    public float windUp = 0.5f;
-    public float cooldown = 1.2f;
-    public int damage = 1;
 
+    PatrollerStats data;
     State state;
     NavMeshAgent agent;
     int waypointIndex;
@@ -25,6 +18,7 @@ public class Patroller : SmartEnemy
     protected override void Start()
     {
         base.Start();
+        data = (PatrollerStats)stats;
         agent = GetComponent<NavMeshAgent>();
         StartPatrol();
     }
@@ -40,14 +34,14 @@ public class Patroller : SmartEnemy
     {
         state = State.Patrol;
         agent.isStopped = false;
-        agent.speed = patrolSpeed;
+        agent.speed = data.patrolSpeed;
         agent.SetDestination(waypoints[waypointIndex].position);
         Play("Walk");
     }
 
     void UpdatePatrol()
     {
-        if (!agent.pathPending && agent.remainingDistance < arriveDistance)
+        if (!agent.pathPending && agent.remainingDistance < data.arriveDistance)
         {
             waypointIndex = (waypointIndex + 1) % waypoints.Length;
             agent.SetDestination(waypoints[waypointIndex].position);
@@ -63,7 +57,7 @@ public class Patroller : SmartEnemy
     {
         state = State.Chase;
         agent.isStopped = false;
-        agent.speed = chaseSpeed;
+        agent.speed = data.chaseSpeed;
         lastSeenTime = Time.time;
         Play("Walk");
     }
@@ -77,11 +71,11 @@ public class Patroller : SmartEnemy
 
         agent.SetDestination(player.position);
 
-        if (DistanceToPlayer() <= attackRange && OnScreen())
+        if (DistanceToPlayer() <= data.attackRange && OnScreen())
         {
             StartAttack();
         }
-        else if (Time.time - lastSeenTime > loseSightTime)
+        else if (Time.time - lastSeenTime > data.loseSightTime)
         {
             StartPatrol();
         }
@@ -104,26 +98,26 @@ public class Patroller : SmartEnemy
         if (!attacked)
         {
             FacePlayer();
-            if (timer >= windUp)
+            if (timer >= data.windUp)
             {
                 attacked = true;
-                Tint(warnColor, 0f);
+                ClearTint();
                 Play("Bite_Front");
-                if (DistanceToPlayer() <= attackRange)
+                if (DistanceToPlayer() <= data.attackRange)
                 {
-                    HurtPlayer(damage);
+                    HurtPlayer(data.damage);
                 }
             }
         }
-        else if (timer >= windUp + cooldown)
+        else if (timer >= data.windUp + data.cooldown)
         {
             StartChase();
         }
     }
 
-    public override void TakeHit()
+    public override void TakeHit(int damage)
     {
-        base.TakeHit();
+        base.TakeHit(damage);
         if (state == State.Patrol)
         {
             StartChase();

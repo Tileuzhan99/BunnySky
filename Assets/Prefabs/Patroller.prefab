@@ -216,25 +216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7938ea2dae048814690d32d723a5fe10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Patroller
-  hp: 3
-  touchDamage: 0
-  visionRange: 8
-  visionAngle: 120
-  eyeHeight: 0.5
-  playerHeight: 0.8
+  stats: {fileID: 11400000, guid: ebf7f03b090c9724ca4a5001af849e31, type: 2}
   warnSound: {fileID: 8300000, guid: 601b1ed96746d514dad02a2dc9a6d805, type: 3}
-  warnColor: {r: 1, g: 0, b: 0, a: 1}
-  warnTint: 0.7
-  fadeTime: 0.1
   waypoints: []
-  patrolSpeed: 2
-  chaseSpeed: 4.2
-  arriveDistance: 0.3
-  loseSightTime: 2
-  attackRange: 1.6
-  windUp: 0.5
-  cooldown: 1.2
-  damage: 1
 --- !u!1001 &7318881515459528157
 PrefabInstance:
   m_ObjectHideFlags: 0

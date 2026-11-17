@@ -11,14 +11,14 @@ public class Boss : Enemy
     public Slider hpBar;
     public AudioClip hitSound;
 
-    int maxHp;
+    BossStats data;
     Animator anim;
     AudioSource audioSource;
 
     void Start()
     {
-        maxHp = hp;
-        hpBar.maxValue = maxHp;
+        data = (BossStats)stats;
+        hpBar.maxValue = data.maxHp;
         hpBar.value = hp;
         anim = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
@@ -32,15 +32,16 @@ public class Boss : Enemy
         transform.LookAt(lookPoint);
     }
 
-    public override void TakeHit()
+    public override void TakeHit(int damage)
     {
         audioSource.PlayOneShot(hitSound);
-        base.TakeHit();
+        base.TakeHit(damage);
         hpBar.value = hp;
     }
 
     protected override void Die()
     {
+        SaveSystem.BossBeaten();
         SceneManager.LoadScene("Win");
     }
 
@@ -48,19 +49,19 @@ public class Boss : Enemy
     {
         while (true)
         {
-            float pause = 2.5f;
-            int count = 3;
+            float pause = data.slowPause;
+            int count = data.slowCount;
 
-            if (hp <= maxHp / 2)
+            if (hp <= data.maxHp * data.fastBelowHpPart)
             {
-                pause = 1.2f;
-                count = 7;
+                pause = data.fastPause;
+                count = data.fastCount;
             }
 
             yield return new WaitForSeconds(pause);
 
             anim.SetTrigger("Attack");
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(data.attackDelay);
 
             ShootFan(count);
         }
@@ -70,7 +71,7 @@ public class Boss : Enemy
     {
         for (int i = 0; i < count; i++)
         {
-            float angle = (i - count / 2) * 15f;
+            float angle = (i - count / 2) * data.fanAngle;
             Quaternion rotation = firePoint.rotation * Quaternion.Euler(0f, angle, 0f);
             Instantiate(fireballPrefab, firePoint.position, rotation);
         }

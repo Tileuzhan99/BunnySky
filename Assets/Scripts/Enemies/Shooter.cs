@@ -7,16 +7,15 @@ public class Shooter : SmartEnemy
     public GameObject shotPrefab;
     public Transform firePoint;
     public LineRenderer laser;
-    public float scanSpeed = 40f;
-    public float windUp = 0.6f;
-    public float cooldown = 1.6f;
 
+    ShooterStats data;
     State state;
     float timer;
 
     protected override void Start()
     {
         base.Start();
+        data = (ShooterStats)stats;
         laser.enabled = false;
         state = State.Watch;
     }
@@ -30,7 +29,7 @@ public class Shooter : SmartEnemy
 
     void UpdateWatch()
     {
-        transform.Rotate(0f, scanSpeed * Time.deltaTime, 0f);
+        transform.Rotate(0f, data.scanSpeed * Time.deltaTime, 0f);
 
         if (CanSeePlayer() && OnScreen())
         {
@@ -46,15 +45,15 @@ public class Shooter : SmartEnemy
         timer += Time.deltaTime;
         FacePlayer();
         laser.SetPosition(0, firePoint.position);
-        laser.SetPosition(1, player.position + Vector3.up * playerHeight);
+        laser.SetPosition(1, PlayerChest());
 
         if (!CanSeePlayer())
         {
             laser.enabled = false;
-            Tint(warnColor, 0f);
+            ClearTint();
             state = State.Watch;
         }
-        else if (timer >= windUp)
+        else if (timer >= data.windUp)
         {
             Shoot();
         }
@@ -62,12 +61,11 @@ public class Shooter : SmartEnemy
 
     void Shoot()
     {
-        Vector3 target = player.position + Vector3.up * playerHeight;
-        Quaternion rotation = Quaternion.LookRotation(target - firePoint.position);
+        Quaternion rotation = Quaternion.LookRotation(PlayerChest() - firePoint.position);
         Instantiate(shotPrefab, firePoint.position, rotation);
 
         laser.enabled = false;
-        Tint(warnColor, 0f);
+        ClearTint();
         Play("Bite_Front");
         state = State.Cooldown;
         timer = 0f;
@@ -76,7 +74,7 @@ public class Shooter : SmartEnemy
     void UpdateCooldown()
     {
         timer += Time.deltaTime;
-        if (timer >= cooldown)
+        if (timer >= data.cooldown)
         {
             Play("Flying");
             state = State.Watch;

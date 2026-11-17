@@ -2,12 +2,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int hp = 1;
-    public bool touchDamage = true;
+    public EnemyStats stats;
 
-    public virtual void TakeHit()
+    protected int hp;
+
+    protected virtual void Awake()
     {
-        hp--;
+        hp = stats.maxHp;
+    }
+
+    public virtual void TakeHit(int damage)
+    {
+        hp -= damage;
         if (hp <= 0)
         {
             Die();
@@ -21,12 +27,12 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!touchDamage) return;
+        if (!stats.touchDamage) return;
 
         Health health = collision.gameObject.GetComponent<Health>();
         if (health != null)
         {
-            health.TakeDamage(1);
+            health.TakeDamage(stats.contactDamage);
         }
     }
 }

@@ -5,18 +5,7 @@ public class Charger : SmartEnemy
 {
     enum State { Wander, WindUp, Charge, Tired }
 
-    public float wanderRadius = 4f;
-    public float wanderSpeed = 1.5f;
-    public float arriveDistance = 0.3f;
-    public float triggerRange = 9f;
-    public float windUp = 0.7f;
-    public float chargeSpeed = 11f;
-    public float chargeTime = 0.8f;
-    public float hitDistance = 1.3f;
-    public float tiredTime = 1.5f;
-    public Color tiredColor = Color.gray;
-    public int damage = 1;
-
+    ChargerStats data;
     State state;
     NavMeshAgent agent;
     Vector3 home;
@@ -27,6 +16,7 @@ public class Charger : SmartEnemy
     protected override void Start()
     {
         base.Start();
+        data = (ChargerStats)stats;
         agent = GetComponent<NavMeshAgent>();
         home = transform.position;
         StartWander();
@@ -43,19 +33,19 @@ public class Charger : SmartEnemy
     void StartWander()
     {
         state = State.Wander;
-        Tint(tiredColor, 0f);
+        ClearTint();
         agent.isStopped = false;
-        agent.speed = wanderSpeed;
+        agent.speed = data.wanderSpeed;
         PickWanderPoint();
         Play("Walk");
     }
 
     void PickWanderPoint()
     {
-        Vector2 random = Random.insideUnitCircle * wanderRadius;
+        Vector2 random = Random.insideUnitCircle * data.wanderRadius;
         Vector3 point = home + new Vector3(random.x, 0f, random.y);
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(point, out hit, wanderRadius, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(point, out hit, data.wanderRadius, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
         }
@@ -63,12 +53,12 @@ public class Charger : SmartEnemy
 
     void UpdateWander()
     {
-        if (!agent.pathPending && agent.remainingDistance < arriveDistance)
+        if (!agent.pathPending && agent.remainingDistance < data.arriveDistance)
         {
             PickWanderPoint();
         }
 
-        if (DistanceToPlayer() <= triggerRange && CanSeePlayer() && OnScreen())
+        if (DistanceToPlayer() <= data.triggerRange && CanSeePlayer() && OnScreen())
         {
             state = State.WindUp;
             timer = 0f;
@@ -83,7 +73,7 @@ public class Charger : SmartEnemy
         timer += Time.deltaTime;
         FacePlayer();
 
-        if (timer >= windUp)
+        if (timer >= data.windUp)
         {
             chargeDirection = player.position - transform.position;
             chargeDirection.y = 0f;
@@ -98,19 +88,19 @@ public class Charger : SmartEnemy
     void UpdateCharge()
     {
         timer += Time.deltaTime;
-        agent.Move(chargeDirection * chargeSpeed * Time.deltaTime);
+        agent.Move(chargeDirection * data.chargeSpeed * Time.deltaTime);
 
-        if (!hitPlayer && DistanceToPlayer() <= hitDistance)
+        if (!hitPlayer && DistanceToPlayer() <= data.hitDistance)
         {
             hitPlayer = true;
-            HurtPlayer(damage);
+            HurtPlayer(data.damage);
         }
 
-        if (timer >= chargeTime)
+        if (timer >= data.chargeTime)
         {
             state = State.Tired;
             timer = 0f;
-            Tint(tiredColor, warnTint);
+            Tint(data.tiredColor, data.warnTint);
             Play("Idle");
         }
     }
@@ -118,7 +108,7 @@ public class Charger : SmartEnemy
     void UpdateTired()
     {
         timer += Time.deltaTime;
-        if (timer >= tiredTime)
+        if (timer >= data.tiredTime)
         {
             StartWander();
         }

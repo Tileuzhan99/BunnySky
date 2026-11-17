@@ -95,10 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b2473fcbe9ea148835a2b473083ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PatrolEnemy
-  hp: 1
+  stats: {fileID: 11400000, guid: 62574471860de1e4cba071da3f2426d8, type: 2}
   pointA: {fileID: 0}
   pointB: {fileID: 0}
-  speed: 3
 --- !u!1001 &7307279540542339574
 PrefabInstance:
   m_ObjectHideFlags: 0

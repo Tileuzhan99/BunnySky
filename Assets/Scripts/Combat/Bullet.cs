@@ -7,7 +7,7 @@ public class Bullet : Projectile
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
-            enemy.TakeHit();
+            enemy.TakeHit(data.damage);
             Destroy(gameObject);
         }
     }

@@ -2,24 +2,19 @@ using UnityEngine;
 
 public class SmartEnemy : Enemy
 {
-    public float visionRange = 8f;
-    public float visionAngle = 120f;
-    public float eyeHeight = 0.5f;
-    public float playerHeight = 0.8f;
     public AudioClip warnSound;
-    public Color warnColor = Color.red;
-    public float warnTint = 0.7f;
-    public float fadeTime = 0.1f;
 
     protected Transform player;
     protected Animator anim;
 
+    SmartEnemyStats senses;
     AudioSource audioSource;
     Material[] materials;
     Color[] baseColors;
 
     protected virtual void Start()
     {
+        senses = (SmartEnemyStats)stats;
         player = GameObject.FindWithTag("Player").transform;
         anim = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
@@ -46,19 +41,23 @@ public class SmartEnemy : Enemy
         return Vector3.Distance(transform.position, player.position);
     }
 
+    protected Vector3 PlayerChest()
+    {
+        return player.position + Vector3.up * senses.playerHeight;
+    }
+
     protected bool CanSeePlayer()
     {
-        Vector3 eye = transform.position + Vector3.up * eyeHeight;
-        Vector3 target = player.position + Vector3.up * playerHeight;
-        Vector3 toPlayer = target - eye;
+        Vector3 eye = transform.position + Vector3.up * senses.eyeHeight;
+        Vector3 toPlayer = PlayerChest() - eye;
 
-        if (toPlayer.magnitude > visionRange) return false;
+        if (toPlayer.magnitude > senses.visionRange) return false;
 
         Vector3 flat = new Vector3(toPlayer.x, 0f, toPlayer.z);
-        if (Vector3.Angle(transform.forward, flat) > visionAngle / 2f) return false;
+        if (Vector3.Angle(transform.forward, flat) > senses.visionAngle / 2f) return false;
 
         RaycastHit hit;
-        if (Physics.Raycast(eye, toPlayer.normalized, out hit, visionRange, ~0, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(eye, toPlayer.normalized, out hit, senses.visionRange, ~0, QueryTriggerInteraction.Ignore))
         {
             return hit.transform == player;
         }
@@ -67,7 +66,7 @@ public class SmartEnemy : Enemy
 
     protected bool OnScreen()
     {
-        Vector3 v = Camera.main.WorldToViewportPoint(transform.position + Vector3.up * eyeHeight);
+        Vector3 v = Camera.main.WorldToViewportPoint(transform.position + Vector3.up * senses.eyeHeight);
         return v.z > 0f && v.x > 0f && v.x < 1f && v.y > 0f && v.y < 1f;
     }
 
@@ -85,8 +84,13 @@ public class SmartEnemy : Enemy
 
     protected void Warn()
     {
-        Tint(warnColor, warnTint);
+        Tint(senses.warnColor, senses.warnTint);
         if (warnSound != null) audioSource.PlayOneShot(warnSound);
+    }
+
+    protected void ClearTint()
+    {
+        Tint(senses.warnColor, 0f);
     }
 
     protected void Tint(Color color, float amount)
@@ -99,6 +103,6 @@ public class SmartEnemy : Enemy
 
     protected void Play(string clip)
     {
-        anim.CrossFade(clip, fadeTime);
+        anim.CrossFade(clip, senses.fadeTime);
     }
 }

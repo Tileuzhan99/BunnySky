@@ -2,17 +2,16 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 12f;
-    public float lifeTime = 3f;
+    public ProjectileData data;
 
     void Start()
     {
-        Destroy(gameObject, lifeTime);
+        Destroy(gameObject, data.lifeTime);
     }
 
     void Update()
     {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        transform.position += transform.forward * data.speed * Time.deltaTime;
     }
 
     void OnTriggerEnter(Collider other)

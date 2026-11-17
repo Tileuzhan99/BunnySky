@@ -273,5 +273,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f020c8ed1ae69924496baf5197f947fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fireball
-  speed: 9
-  lifeTime: 3
+  data: {fileID: 11400000, guid: 0d2649e3ce52c7f46b0862271c041b5c, type: 2}

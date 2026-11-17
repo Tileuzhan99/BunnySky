@@ -7,7 +7,7 @@ public class Fireball : Projectile
         Health health = other.GetComponent<Health>();
         if (health != null)
         {
-            health.TakeDamage(1);
+            health.TakeDamage(data.damage);
             Destroy(gameObject);
         }
     }

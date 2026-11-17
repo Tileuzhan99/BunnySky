@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public int maxHp = 3;
-    public int hp;
+    public PlayerStats stats;
     public Image[] hearts;
+    public Color emptyHeartColor;
     public AudioClip hurtSound;
     public AudioClip healSound;
+
+    public int hp;
 
     bool invincible;
     Renderer[] renderers;
@@ -17,7 +19,7 @@ public class Health : MonoBehaviour
 
     void Start()
     {
-        hp = maxHp;
+        hp = stats.maxHp;
         renderers = GetComponentsInChildren<Renderer>();
         audioSource = GetComponent<AudioSource>();
         ShowHearts();
@@ -44,7 +46,7 @@ public class Health : MonoBehaviour
     public void Heal(int amount)
     {
         hp += amount;
-        if (hp > maxHp) hp = maxHp;
+        if (hp > stats.maxHp) hp = stats.maxHp;
         ShowHearts();
         audioSource.PlayOneShot(healSound);
     }
@@ -54,7 +56,7 @@ public class Health : MonoBehaviour
         for (int i = 0; i < hearts.Length; i++)
         {
             if (i < hp) hearts[i].color = Color.white;
-            else hearts[i].color = new Color(0f, 0f, 0f, 0.4f);
+            else hearts[i].color = emptyHeartColor;
         }
     }
 
@@ -62,13 +64,15 @@ public class Health : MonoBehaviour
     {
         invincible = true;
 
-        for (int i = 0; i < 10; i++)
+        float time = 0f;
+        while (time < stats.invincibleTime)
         {
             foreach (Renderer r in renderers)
             {
                 r.enabled = !r.enabled;
             }
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(stats.blinkInterval);
+            time += stats.blinkInterval;
         }
 
         foreach (Renderer r in renderers)
