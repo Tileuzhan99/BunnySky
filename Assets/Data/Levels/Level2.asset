@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de73eab608d432c4c907a3350f7cc9a4, type: 3}
+  m_Name: Level2
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  title: LEVEL 2
+  hint: Collect 7 coins! Watch out for crabs and the bee.
+  layout: {fileID: 647743927711916411, guid: 106a93777ec831f44953e0df4fe92648, type: 3}
+  music: {fileID: 8300000, guid: 89fe7218ea27e704cb833aafb6211ee4, type: 3}
+  playerStart: {x: 0, y: 0, z: 0}
+  cameraOffset: {x: 0, y: 4.2, z: -7}
+  timeLimit: 180
+  coinsToOpenGoal: 7
+  goalPosition: {x: 0, y: 8, z: 57.2}
+  goalRotation: 180
+  coins:
+  - {x: 0, y: 1, z: 10.5}
+  - {x: -1.5, y: 1, z: 18}
+  - {x: 1.5, y: 1, z: 23}
+  - {x: -1, y: 3.3, z: 32}
+  - {x: -2.5, y: 4, z: 44}
+  - {x: -2, y: 9, z: 56.5}
+  - {x: 2, y: 9, z: 52.5}
+  hearts:
+  - {x: 3, y: 4, z: 44.5}
+  hazards:
+  - prefab: {fileID: 5952867507162062740, guid: 35340b5bd1f7a1642999457807a092f9, type: 3}
+    position: {x: -1.6, y: 0, z: 21}
+    rotation: 0
+  - prefab: {fileID: 5952867507162062740, guid: 35340b5bd1f7a1642999457807a092f9, type: 3}
+    position: {x: 1.5, y: 0, z: 4}
+    rotation: 0
+  - prefab: {fileID: 3489423827624496546, guid: aaae1ba6a633faf459587e6108792207, type: 3}
+    position: {x: 2.4, y: 3, z: 40.2}
+    rotation: 0
+  - prefab: {fileID: 5952867507162062740, guid: 35340b5bd1f7a1642999457807a092f9, type: 3}
+    position: {x: -3, y: 3, z: 40}
+    rotation: 0
+  enemies:
+  - prefab: {fileID: 2553075637070893867, guid: 1eab464956f24174e95e3edf0d3a5983, type: 3}
+    position: {x: 0, y: 0, z: 16}
+    rotation: 0
+    waypoints:
+    - {x: 0, y: 0, z: 16}
+    - {x: 0, y: 0, z: 24.5}
+  - prefab: {fileID: 7266754255328479273, guid: 9574efed370e72a47bad24c4dc583bb8, type: 3}
+    position: {x: -3, y: 3.5, z: 42.5}
+    rotation: 90
+    waypoints:
+    - {x: -3, y: 3.5, z: 42.5}
+    - {x: 3, y: 3.5, z: 42.5}
+  - prefab: {fileID: 2553075637070893867, guid: 1eab464956f24174e95e3edf0d3a5983, type: 3}
+    position: {x: -2.5, y: 8, z: 54.5}
+    rotation: 90
+    waypoints:
+    - {x: -2.5, y: 8, z: 54.5}
+    - {x: 2.5, y: 8, z: 54.5}

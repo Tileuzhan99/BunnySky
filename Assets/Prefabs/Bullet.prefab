@@ -273,5 +273,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6531267b249fa74689e2298c50998ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  speed: 16
-  lifeTime: 2
+  data: {fileID: 11400000, guid: c83613792a69a544b84f72f68c5cb858, type: 2}

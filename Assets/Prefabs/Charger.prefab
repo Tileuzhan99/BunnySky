@@ -216,27 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62525a23000596a4597fdb9e669daa2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Charger
-  hp: 3
-  touchDamage: 0
-  visionRange: 10
-  visionAngle: 360
-  eyeHeight: 0.55
-  playerHeight: 0.8
+  stats: {fileID: 11400000, guid: 50d819047c445c742bec068b7ef677cf, type: 2}
   warnSound: {fileID: 8300000, guid: 601b1ed96746d514dad02a2dc9a6d805, type: 3}
-  warnColor: {r: 1, g: 0, b: 0, a: 1}
-  warnTint: 0.7
-  fadeTime: 0.1
-  wanderRadius: 4
-  wanderSpeed: 1.5
-  arriveDistance: 0.3
-  triggerRange: 9
-  windUp: 0.7
-  chargeSpeed: 13
-  chargeTime: 0.8
-  hitDistance: 1.3
-  tiredTime: 1.5
-  tiredColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  damage: 1
 --- !u!1001 &1731917473567729698
 PrefabInstance:
   m_ObjectHideFlags: 0
