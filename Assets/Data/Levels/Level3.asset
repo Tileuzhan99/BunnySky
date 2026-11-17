@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de73eab608d432c4c907a3350f7cc9a4, type: 3}
+  m_Name: Level3
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  title: LEVEL 3
+  hint: Red flash = attack! Hide behind crates.
+  layout: {fileID: 7302385254080202408, guid: 9d04e1b79814607429cd090a7ec9a7ac, type: 3}
+  music: {fileID: 8300000, guid: 89fe7218ea27e704cb833aafb6211ee4, type: 3}
+  playerStart: {x: 0, y: 0, z: -2}
+  cameraOffset: {x: 0, y: 4.2, z: -7}
+  timeLimit: 180
+  coinsToOpenGoal: 6
+  goalPosition: {x: 8, y: 0, z: 33.5}
+  goalRotation: 200
+  coins:
+  - {x: -8, y: 1, z: 15}
+  - {x: -2, y: 1, z: 19.5}
+  - {x: 8, y: 1, z: 14}
+  - {x: 4, y: 1, z: 24.5}
+  - {x: -9, y: 1, z: 31}
+  - {x: 8, y: 1, z: 27}
+  hearts:
+  - {x: -3, y: 1, z: 29.5}
+  hazards: []
+  enemies:
+  - prefab: {fileID: 612785831923067997, guid: 255a7f05ee8eb434e9098a9c9c5cd8e0, type: 3}
+    position: {x: -7, y: 0, z: 14}
+    rotation: 0
+    waypoints:
+    - {x: -7, y: 0, z: 14}
+    - {x: -7, y: 0, z: 25}
+    - {x: -1, y: 0, z: 21.5}
+  - prefab: {fileID: 3904442254355673160, guid: 04315a7afaa40804ca74aacd1a0a1a44, type: 3}
+    position: {x: 6, y: 0, z: 17}
+    rotation: 270
+    waypoints: []
+  - prefab: {fileID: 7076749026861643553, guid: e1eb881f36325e24ea7b1f3612fe2813, type: 3}
+    position: {x: 0, y: 2.7, z: 33}
+    rotation: 180
+    waypoints: []

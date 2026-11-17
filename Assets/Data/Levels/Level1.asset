@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de73eab608d432c4c907a3350f7cc9a4, type: 3}
+  m_Name: Level1
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  title: LEVEL 1
+  hint: Collect 5 coins and reach the flag!
+  layout: {fileID: 692196105687736697, guid: 802632e3a04a94945ac0c6e58bd25cde, type: 3}
+  music: {fileID: 8300000, guid: 89fe7218ea27e704cb833aafb6211ee4, type: 3}
+  playerStart: {x: 0, y: 0, z: 0}
+  cameraOffset: {x: 0, y: 4.2, z: -7}
+  timeLimit: 120
+  coinsToOpenGoal: 5
+  goalPosition: {x: 0, y: 3, z: 38.8}
+  goalRotation: 180
+  coins:
+  - {x: 0, y: 1, z: 6}
+  - {x: -1.5, y: 1, z: 13.5}
+  - {x: 0, y: 2.5, z: 21.5}
+  - {x: -4, y: 4.2, z: 28}
+  - {x: 2, y: 4, z: 36}
+  hearts:
+  - {x: -2.5, y: 4, z: 38.5}
+  hazards:
+  - prefab: {fileID: 5952867507162062740, guid: 35340b5bd1f7a1642999457807a092f9, type: 3}
+    position: {x: 1.5, y: 0, z: 13.5}
+    rotation: 0
+  - prefab: {fileID: 5952867507162062740, guid: 35340b5bd1f7a1642999457807a092f9, type: 3}
+    position: {x: 1.4, y: 1.5, z: 21.5}
+    rotation: 0
+  - prefab: {fileID: 5952867507162062740, guid: 35340b5bd1f7a1642999457807a092f9, type: 3}
+    position: {x: -2, y: 3, z: 35}
+    rotation: 0
+  enemies: []
