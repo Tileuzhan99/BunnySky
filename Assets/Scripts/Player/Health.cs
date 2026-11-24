@@ -15,13 +15,11 @@ public class Health : MonoBehaviour
 
     bool invincible;
     Renderer[] renderers;
-    AudioSource audioSource;
 
     void Start()
     {
         hp = stats.maxHp;
         renderers = GetComponentsInChildren<Renderer>();
-        audioSource = GetComponent<AudioSource>();
         ShowHearts();
     }
 
@@ -31,14 +29,13 @@ public class Health : MonoBehaviour
 
         hp -= damage;
         ShowHearts();
-        audioSource.PlayOneShot(hurtSound);
-
         if (hp <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Die();
         }
         else
         {
+            SoundManager.Play(hurtSound);
             StartCoroutine(Blink());
         }
     }
@@ -48,7 +45,13 @@ public class Health : MonoBehaviour
         hp += amount;
         if (hp > stats.maxHp) hp = stats.maxHp;
         ShowHearts();
-        audioSource.PlayOneShot(healSound);
+        SoundManager.Play(healSound);
+    }
+
+    public void Die()
+    {
+        SoundManager.Play(SoundManager.instance.loseSound);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void ShowHearts()

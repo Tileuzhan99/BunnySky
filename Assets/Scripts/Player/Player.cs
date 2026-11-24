@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Player : MonoBehaviour
@@ -18,7 +17,7 @@ public class Player : MonoBehaviour
 
     Rigidbody rb;
     Animator anim;
-    AudioSource audioSource;
+    Health health;
     Vector2 move;
     bool onGround;
     float nextFireTime;
@@ -27,7 +26,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
-        audioSource = GetComponent<AudioSource>();
+        health = GetComponent<Health>();
         coinText.text = coins + " / " + coinsNeeded;
     }
 
@@ -41,7 +40,7 @@ public class Player : MonoBehaviour
         if (onGround)
         {
             rb.AddForce(Vector3.up * stats.jumpForce, ForceMode.Impulse);
-            audioSource.PlayOneShot(jumpSound);
+            SoundManager.Play(jumpSound);
         }
     }
 
@@ -51,7 +50,7 @@ public class Player : MonoBehaviour
         {
             nextFireTime = Time.time + stats.fireCooldown;
             Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-            audioSource.PlayOneShot(shootSound);
+            SoundManager.Play(shootSound);
         }
     }
 
@@ -64,7 +63,7 @@ public class Player : MonoBehaviour
 
         if (transform.position.y < stats.fallLimit)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            health.Die();
         }
     }
 
@@ -89,6 +88,6 @@ public class Player : MonoBehaviour
     {
         coins += amount;
         coinText.text = coins + " / " + coinsNeeded;
-        audioSource.PlayOneShot(coinSound);
+        SoundManager.Play(coinSound);
     }
 }

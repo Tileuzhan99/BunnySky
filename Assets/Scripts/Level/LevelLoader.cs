@@ -10,7 +10,6 @@ public class LevelLoader : MonoBehaviour
     public LevelData[] levels;
     public Player player;
     public CameraFollow cameraFollow;
-    public AudioSource music;
     public GameObject coinPrefab;
     public GameObject heartPrefab;
     public GameObject goalPrefab;
@@ -44,11 +43,14 @@ public class LevelLoader : MonoBehaviour
         cameraFollow.transform.position = level.playerStart + level.cameraOffset;
         titleText.text = level.title;
         hintText.text = level.hint;
-        music.clip = level.music;
-        music.Play();
 
         timeLeft = level.timeLimit;
         completePanel.SetActive(false);
+    }
+
+    void Start()
+    {
+        SoundManager.instance.PlayMusic(level.music);
     }
 
     void SpawnEnemy(EnemySpawn spawn)
@@ -85,6 +87,7 @@ public class LevelLoader : MonoBehaviour
 
         if (timeLeft <= 0f)
         {
+            SoundManager.Play(SoundManager.instance.loseSound);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
@@ -97,6 +100,7 @@ public class LevelLoader : MonoBehaviour
         float time = level.timeLimit - timeLeft;
         float best = SaveSystem.CompleteLevel(levelIndex, time);
 
+        SoundManager.Play(SoundManager.instance.winSound);
         pauseButton.SetActive(false);
         pauseMenu.enabled = false;
         completeText.text = "Time " + FormatTime(time) + "    Best " + FormatTime(best);

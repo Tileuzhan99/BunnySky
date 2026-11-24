@@ -16,7 +16,12 @@ public class Enemy : MonoBehaviour
         hp -= damage;
         if (hp <= 0)
         {
+            SoundManager.Play(stats.deathSound);
             Die();
+        }
+        else
+        {
+            SoundManager.Play(stats.hitSound);
         }
     }
 

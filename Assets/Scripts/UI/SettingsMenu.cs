@@ -15,13 +15,14 @@ public class SettingsMenu : MonoBehaviour
     public void SetMusic(float value)
     {
         SaveSystem.Data.musicVolume = value;
+        SoundManager.instance.SetVolume("MusicVolume", value);
         SaveSystem.Save();
     }
 
     public void SetSound(float value)
     {
         SaveSystem.Data.soundVolume = value;
-        AudioListener.volume = value;
+        SoundManager.instance.SetVolume("SFXVolume", value);
         SaveSystem.Save();
     }
 }

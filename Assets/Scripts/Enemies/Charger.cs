@@ -82,6 +82,7 @@ public class Charger : SmartEnemy
             timer = 0f;
             hitPlayer = false;
             Play("Bite_Front");
+            SoundManager.Play(stats.attackSound);
         }
     }
 

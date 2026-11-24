@@ -25,7 +25,6 @@ public static class SaveSystem
     static void Init()
     {
         Load();
-        AudioListener.volume = data.soundVolume;
         GameObject go = new GameObject("SaveOnPause");
         Object.DontDestroyOnLoad(go);
         go.AddComponent<SaveOnPause>();
