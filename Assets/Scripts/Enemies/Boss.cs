@@ -9,11 +9,9 @@ public class Boss : Enemy
     public Transform firePoint;
     public Transform player;
     public Slider hpBar;
-    public AudioClip hitSound;
 
     BossStats data;
     Animator anim;
-    AudioSource audioSource;
 
     void Start()
     {
@@ -21,7 +19,6 @@ public class Boss : Enemy
         hpBar.maxValue = data.maxHp;
         hpBar.value = hp;
         anim = GetComponentInChildren<Animator>();
-        audioSource = GetComponent<AudioSource>();
         StartCoroutine(Attack());
     }
 
@@ -34,7 +31,6 @@ public class Boss : Enemy
 
     public override void TakeHit(int damage)
     {
-        audioSource.PlayOneShot(hitSound);
         base.TakeHit(damage);
         hpBar.value = hp;
     }
@@ -61,9 +57,11 @@ public class Boss : Enemy
             yield return new WaitForSeconds(pause);
 
             anim.SetTrigger("Attack");
+            SoundManager.Play(stats.windUpSound);
             yield return new WaitForSeconds(data.attackDelay);
 
             ShootFan(count);
+            SoundManager.Play(stats.attackSound);
         }
     }
 

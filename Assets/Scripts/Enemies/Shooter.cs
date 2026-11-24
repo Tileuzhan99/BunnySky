@@ -67,6 +67,7 @@ public class Shooter : SmartEnemy
         laser.enabled = false;
         ClearTint();
         Play("Bite_Front");
+            SoundManager.Play(stats.attackSound);
         state = State.Cooldown;
         timer = 0f;
     }

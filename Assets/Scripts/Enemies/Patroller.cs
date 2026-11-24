@@ -103,6 +103,7 @@ public class Patroller : SmartEnemy
                 attacked = true;
                 ClearTint();
                 Play("Bite_Front");
+                SoundManager.Play(stats.attackSound);
                 if (DistanceToPlayer() <= data.attackRange)
                 {
                     HurtPlayer(data.damage);

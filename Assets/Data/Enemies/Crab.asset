@@ -15,5 +15,9 @@ MonoBehaviour:
   maxHp: 2
   touchDamage: 1
   contactDamage: 1
+  windUpSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: fb374c6223f1d5942864dbeb7c89b7ff, type: 3}
+  deathSound: {fileID: 8300000, guid: d20d4db3f7eb2774eac2e9affa44f91c, type: 3}
   speed: 2
   arriveDistance: 0.1

@@ -15,6 +15,10 @@ MonoBehaviour:
   maxHp: 3
   touchDamage: 0
   contactDamage: 0
+  windUpSound: {fileID: 8300000, guid: 601b1ed96746d514dad02a2dc9a6d805, type: 3}
+  attackSound: {fileID: 8300000, guid: b880f0b18f7bab14c961487a475d6ec4, type: 3}
+  hitSound: {fileID: 8300000, guid: fb374c6223f1d5942864dbeb7c89b7ff, type: 3}
+  deathSound: {fileID: 8300000, guid: d20d4db3f7eb2774eac2e9affa44f91c, type: 3}
   visionRange: 10
   visionAngle: 360
   eyeHeight: 0.55

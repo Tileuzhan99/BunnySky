@@ -2,13 +2,10 @@ using UnityEngine;
 
 public class SmartEnemy : Enemy
 {
-    public AudioClip warnSound;
-
     protected Transform player;
     protected Animator anim;
 
     SmartEnemyStats senses;
-    AudioSource audioSource;
     Material[] materials;
     Color[] baseColors;
 
@@ -17,7 +14,6 @@ public class SmartEnemy : Enemy
         senses = (SmartEnemyStats)stats;
         player = GameObject.FindWithTag("Player").transform;
         anim = GetComponentInChildren<Animator>();
-        audioSource = GetComponent<AudioSource>();
 
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
         int count = 0;
@@ -85,7 +81,7 @@ public class SmartEnemy : Enemy
     protected void Warn()
     {
         Tint(senses.warnColor, senses.warnTint);
-        if (warnSound != null) audioSource.PlayOneShot(warnSound);
+        SoundManager.Play(stats.windUpSound);
     }
 
     protected void ClearTint()
